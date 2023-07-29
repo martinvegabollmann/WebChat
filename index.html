@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+
+    <!-- Importa los módulos de Firebase -->
+    <script type="module">
+      import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js';
+      import { getAuth } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js';
+      import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js';
+
+      // Tu configuración de Firebase
+      var firebaseConfig = {
+        apiKey: "AIzaSyDM03RVslFmJb_lb_Ng-Ds7iiAzEYoSfI8",
+        authDomain: "webproyecto-54092.firebaseapp.com",
+        projectId: "webproyecto-54092",
+        storageBucket: "webproyecto-54092.appspot.com",
+        messagingSenderId: "486030175441",
+        appId: "1:486030175441:web:ece840661ee13c4b71a9f0"
+      };
+
+   
+      // Inicializa Firebase
+      const app = initializeApp(firebaseConfig);
+
+      // Crea una variable global 'firebase' que contenga los módulos que necesitas
+      window.firebase = {
+        auth: getAuth(app),
+        firestore: getFirestore(app)
+      };
+
+      // Importa app.js después de que Firebase se haya cargado
+      import('./app.js');
+    </script>
+  </head>
+  <body>
+    <div class="container">
+        <nav class="navbar navbar-dark bg-dark">
+            <span class="navbar-brand" id="username">WEB CHAT</span>
+            <div id="buttons">
+            </div>
+        </nav>
+    </div>
+  </body>
+</html>
