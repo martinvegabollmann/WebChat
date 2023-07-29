@@ -10,13 +10,12 @@
 
     <title>Hello, world!</title>
 
-    <!-- Importa los módulos de Firebase -->
-    <script type="module">
-      import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js';
-      import { getAuth } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js';
-      import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js';
+      <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+      <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+      <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
-      // Tu configuración de Firebase
+      <script type="module">
+
       var firebaseConfig = {
         apiKey: "AIzaSyDM03RVslFmJb_lb_Ng-Ds7iiAzEYoSfI8",
         authDomain: "webproyecto-54092.firebaseapp.com",
@@ -25,28 +24,19 @@
         messagingSenderId: "486030175441",
         appId: "1:486030175441:web:ece840661ee13c4b71a9f0"
       };
+    
+      firebase.initializeApp(firebaseConfig);
 
-   
-      // Inicializa Firebase
-      const app = initializeApp(firebaseConfig);
-
-      // Crea una variable global 'firebase' que contenga los módulos que necesitas
-      window.firebase = {
-        auth: getAuth(app),
-        firestore: getFirestore(app)
-      };
-
-      // Importa app.js después de que Firebase se haya cargado
-      import('./app.js');
     </script>
-  </head>
-  <body>
+
+</head>
+<body>
     <div class="container">
-        <nav class="navbar navbar-dark bg-dark">
-            <span class="navbar-brand" id="username">WEB CHAT</span>
-            <div id="buttons">
-            </div>
-        </nav>
+      <nav class="navbar navbar-dark bg-dark">
+          <span class="navbar-brand" id="username">WEB CHAT</span>
+          <div id="buttons">
+      </nav>
     </div>
-  </body>
+    <script src="app.js"></script>
+    </body>
 </html>
