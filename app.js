@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const buttons = document.querySelector('#buttons');
   const username = document.querySelector('#username');
+  const contentProtected = document.querySelector('#contentProtected')
 
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
@@ -10,20 +11,26 @@ document.addEventListener('DOMContentLoaded', () => {
       `
       username.innerHTML = user.displayName
       logout()
+      contentProtected.innerHTML = /*html*/`
+      <p class="text-center lead mt-5">Welcome ${user.email}</p>
+      `
     } else {
-      console.log('No existe un usuario');
+      console.log('Does not exist User');
       buttons.innerHTML = /*html*/ `
         <button class="btn btn-outline-success mr-2" id="btnAccess">Access</button>
       `;
       startSesion()
       username.innerHTML = 'WEB CHAT'
+      contentProtected.innerHTML = /*html*/ `
+      <p class= "text-center lead mt-5">You Must First Log in</p>
+    `
     }
   });
 
   const startSesion = () => {
     const btnAccess = document.querySelector('#btnAccess');
     btnAccess.addEventListener('click', async () => {
-      console.log('hiciste clic');
+      console.log('you did click');
       try {
         const provider = new firebase.auth.GoogleAuthProvider()
         await firebase.auth().signInWithPopup(provider)
@@ -39,8 +46,5 @@ document.addEventListener('DOMContentLoaded', () => {
       firebase.auth().signOut()
     })
   }
-
-
-
 
 });
