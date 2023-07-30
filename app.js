@@ -54,6 +54,31 @@ document.addEventListener('DOMContentLoaded', () => {
         inputChat.value= ""
 
     })
+
+    firebase.firestore().collection('WebChat').orderBy('dateExact').onSnapshot(query=>{
+
+      contentProtected.innerHTML = ""
+      query.forEach(doc => {
+        console.log(doc.data())
+        if(doc.data().uid === user.uid){
+          contentProtected.innerHTML += `
+            <div class="d-flex justify-content-end">
+                <span class="badge badge-pill badge-primary">${doc.data().texto}</span>
+            </div>
+          `
+        }else{
+          contentProtected.innerHTML += `
+            <div class="d-flex justify-content-start">
+                  <span class="badge badge-pill badge-secondary">${doc.data().texto}</span>
+            </div>
+          `
+        }
+
+        contentProtected.scrollTop = contentProtected.scrollHeight
+
+      })
+    })
+
   }
 
   const startSesion = () => {
