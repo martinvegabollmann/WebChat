@@ -7,13 +7,16 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log(user);
       buttons.innerHTML = /*html*/ `
         <button class="btn btn-outline-danger mr-2" id="btnLogout">Logout</button>
-      `;
+      `
+      username.innerHTML = user.displayName
+      logout()
     } else {
       console.log('No existe un usuario');
       buttons.innerHTML = /*html*/ `
         <button class="btn btn-outline-success mr-2" id="btnAccess">Access</button>
       `;
-      startSesion();
+      startSesion()
+      username.innerHTML = 'WEB CHAT'
     }
   });
 
@@ -29,4 +32,15 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   };
+
+  const logout = () => {
+    const btnLogout = document.querySelector('#btnLogout')
+    btnLogout.addEventListener('click', ()=> {
+      firebase.auth().signOut()
+    })
+  }
+
+
+
+
 });
