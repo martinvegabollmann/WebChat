@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const buttons = document.querySelector('#buttons');
   const username = document.querySelector('#username');
   const contentProtected = document.querySelector('#contentProtected')
+  const form = document.querySelector('#form')
+  const inputChat = document.querySelector('#inputChat')
 
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
@@ -11,9 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
       `
       username.innerHTML = user.displayName
       logout()
-      contentProtected.innerHTML = /*html*/`
-      <p class="text-center lead mt-5">Welcome ${user.email}</p>
-      `
+      
+      form.classList = 'input-group py-3 fixed-bottom container'
+      chatcontent(user)
+
     } else {
       console.log('Does not exist User');
       buttons.innerHTML = /*html*/ `
@@ -24,8 +27,34 @@ document.addEventListener('DOMContentLoaded', () => {
       contentProtected.innerHTML = /*html*/ `
       <p class= "text-center lead mt-5">You Must First Log in</p>
     `
-    }
+    form.classList = 'input-group py-3 fixed-bottom container d-none'
+
+  }
   });
+
+  const chatcontent = (user) => {
+    
+      form.addEventListener('submit', (e) =>{
+        e.preventDefault()
+        console.log(inputChat.value)
+
+        if(!inputChat.value.trim()){
+          console.log('Input Empty')
+          return
+        }
+
+        firebase.firestore().collection('WebChat').add({
+          texto: inputChat.value,
+          uid: user.uid,
+          dateExact: Date.now()
+        })
+          .then(res => {console.log('Saved Message')})
+          .catch(e => console.log(e))
+
+        inputChat.value= ""
+
+    })
+  }
 
   const startSesion = () => {
     const btnAccess = document.querySelector('#btnAccess');
