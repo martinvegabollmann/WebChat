@@ -116,21 +116,26 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   };
-
-  const logout = () => {
+  const logout = async () => {
     const btnLogout = document.querySelector('#btnLogout');
-    btnLogout.addEventListener('click', () => {
-      
+    btnLogout.addEventListener('click', async () => {
+
       const user = firebase.auth().currentUser;
       if (user) {
-        firebase.firestore().collection('Users').doc(user.uid).delete()
-          .then(() => {
-            firebase.auth().signOut();
-          })
-          .catch((error) => {
-            console.log('Error deleting user data:', error);
-          });
+        const messagesSnapshot = await firebase.firestore().collection('WebChat').where('uid', '==', user.uid).get();
+  
+        const batch = firebase.firestore().batch();
+        messagesSnapshot.forEach((doc) => {
+          batch.delete(doc.ref);
+        });
+  
+        await batch.commit();
+  
+        await firebase.firestore().collection('Users').doc(user.uid).delete();
+  
+        firebase.auth().signOut();
       }
     });
   };
+  
 });
