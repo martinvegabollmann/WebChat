@@ -95,20 +95,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnAccess = document.querySelector('#btnAccess');
     btnAccess.addEventListener('click', async () => {
       try {
-        // Get the list of all authenticated users
         const usersSnapshot = await firebase.firestore().collection('Users').get();
         const numUsers = usersSnapshot.size;
 
-        // Check if there are already two users connected
+
         if (numUsers >= 2) {
-          console.log('Maximum number of users reached. Cannot connect more users.');
+          window.alert('The Session is Full No More Users allowd');
           return;
         }
 
         const provider = new firebase.auth.GoogleAuthProvider();
         const result = await firebase.auth().signInWithPopup(provider);
 
-        // Save the user data in the 'Users' collection
         await firebase.firestore().collection('Users').doc(result.user.uid).set({
           displayName: result.user.displayName,
           email: result.user.email,
@@ -122,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const logout = () => {
     const btnLogout = document.querySelector('#btnLogout');
     btnLogout.addEventListener('click', () => {
-      // Eliminar los datos del usuario de la base de datos
+      
       const user = firebase.auth().currentUser;
       if (user) {
         firebase.firestore().collection('Users').doc(user.uid).delete()
