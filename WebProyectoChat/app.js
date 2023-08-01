@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (user) {
       console.log(user);
       buttons.innerHTML = /*html*/ `
-        <button class="btn btn-outline-danger mr-2" id="btnLogout">Cerrar sesión</button>
+        <button class="btn btn-outline-danger mr-2" id="btnLogout">Logout</button>
       `;
       username.innerHTML = user.displayName;
       logout();
