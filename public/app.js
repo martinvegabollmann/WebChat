@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         if (numUsers >= 2) {
-          window.alert('The Session is Full No More Users allowd');
+          window.alert('The Session is Full No More Users allowed');
           return;
         }
 
